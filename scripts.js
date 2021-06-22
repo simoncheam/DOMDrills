@@ -24,7 +24,7 @@ header2.appendChild(header2Text); //appending text to h2
 newDiv.appendChild(header2); //appending h2 to div
 
 header2.className = 'h2'; // give class name
-console.log(header2);
+// console.log(header2);
 
 // ---------------------------------- //
 // #6 Repeat the following task for h3's through h6's
@@ -72,13 +72,16 @@ header6.className = 'h6'; // give class name
 
 /// button click event
 
-//document.getElementById("myBtn").addEventListener("click", function() {
-   // document.getElementById("demo").innerHTML = "Hello World";
-  //});
+//assign className to all headers
+header1.className = 'dblclickHeaders';
+header2.className = 'dblclickHeaders';
+header3.className = 'dblclickHeaders';
+header4.className = 'dblclickHeaders';
+header5.className = 'dblclickHeaders';
+header6.className = 'dblclickHeaders';
 
-
-
-
+//not sure if we need this
+const allHeaders = [ header1, header2, header3, header4, header5, header6];
 
 
 
@@ -87,26 +90,40 @@ header6.className = 'h6'; // give class name
 var colorArray = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
 		  '#E6B333', '#3366E6', '#999966'];
 
-newDiv.addEventListener('dblclick', function(){
 
-  //  console.log('test the double click!!!!');  // it works!
-    newDiv.style.color = 'purple';
-    header1.style.color = random_item(colorArray);
-    header2.style.color = random_item(colorArray);
-    header3.style.color = random_item(colorArray);
-    header4.style.color = random_item(colorArray);
-    header5.style.color = random_item(colorArray);
-    header6.style.color = random_item(colorArray);
+//const allHeaders = document.getElementsByClassName('dblclickHeaders'); /// Q: where does "dblclickHeaders" come from or get set? 
+
+//console.log(allHeaders[1]); //console allheaders
 
 
+/// Assign color change to headers on click
 
-    // for (let i=0; i < 8; i++) {
+for (let i = 0; i < allHeaders.length; i++) {
 
-        console.log(random_item(colorArray));
+  allHeaders[i].addEventListener('dblclick', function(){
+      allHeaders[i].style.color =random_item(colorArray);
+  });
 
-});
+}
 
-//Buttonclick.addEventListener
+
+
+
+/// EDIT 6/21 to create header array
+
+// newDiv.addEventListener('dblclick', function(){
+
+//   //  console.log('test the double click!!!!');  // it works!
+//     newDiv.style.color = 'purple';
+//     header1.style.color = random_item(colorArray);
+//     header2.style.color = random_item(colorArray);
+//     header3.style.color = random_item(colorArray);
+//     header4.style.color = random_item(colorArray);
+//     header5.style.color = random_item(colorArray);
+//     header6.style.color = random_item(colorArray);
+//         console.log(random_item(colorArray));
+
+// });
 
 
 
@@ -117,8 +134,6 @@ function random_item(colorArray){
 return colorArray[Math.floor(Math.random()*colorArray.length)];
 };
 
-// var colorArray = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
-// 		  '#E6B333', '#3366E6', '#999966'];
 
 console.log(random_item(colorArray));
 
@@ -137,26 +152,19 @@ document.addEventListener('DOMContentLoaded', function() {
 ////////////////////////////////////  [[[[ Button Stuff  ]]]]]
 
 
-//const ButtonTest = document.getElementById('poop');
-//const ButtonTest = document.getElementsByClassName('myBtn');
-
-//test 3
-
 
 const myBtn = document.createElement('button'); // creating element of my button
 const btnText = document.createTextNode('Click to add new list item'); // Create button text 
 myBtn.id='pizza'; ///assigning ID
 myBtn.appendChild(btnText);
-
-
-console.log(myBtn);
+//console.log(myBtn);
 
 //document.body.appendChild(myBtn); //appending button element to document body
 newDiv.appendChild(myBtn);
 
 myBtn.addEventListener('click', function(){  // launch function via click event on button ID
     
-    console.log('Button Test here???');  // log if function worked
+    //console.log('Button Test here???');  // log if function worked
      });
 
 
@@ -164,11 +172,75 @@ myBtn.addEventListener('click', function(){  // launch function via click event 
 
 
 
-
-
-////////////////////////////////////  [[[[ NEW PARAGRAPH TEXT  ]]]]]
-
+////////////////////////////////////  [[[[ Creating Unordered List  ]]]]]
 
 
 
-////////////////////////////////////  [[[[ NEW PARAGRAPH TEXT  ]]]]]
+const myUnorderedList = document.createElement('ul');
+newDiv.appendChild(myUnorderedList);  ///append UL to newDiv
+
+////////////////////////////////////  [[[[ CLICK === NEW li TEXT  ]]]]]
+
+
+let liCounter = 1; 
+
+myBtn.addEventListener('click', function(){
+
+  const li = document.createElement('li');
+  li.textContent = 'I am a new li added to the page, welcome li #' +liCounter;
+  myUnorderedList.appendChild(li); //li appended to myUL
+  console.log('I am a new li added to the page, welcome li #: ' +liCounter);
+  liCounter += 1;
+  // console.log(myUnorderedList[2]);
+  
+var list = document.getElementsByTagName('li');
+
+////  Trying to change li text color via click (it works))
+// #13
+
+////////////////////////////////////  [[[[ li Color Change on Click  ]]]]]
+
+for (let i = 0; i < list.length; i++) {
+  list[i].addEventListener('click', function(){
+    list[i].style.color =random_item(colorArray);
+  });
+  
+  // console.log('this is a the list: ');
+  // console.log(list);
+
+  // console.log('this is a the list @ i: ');
+  // console.log(list[i]);
+
+  }
+
+
+  ///// Need:  add dblclick removal here!
+  for (let i = 0; i < list.length; i++) {
+    list[i].addEventListener('dblclick', function(){
+      myUnorderedList.removeChild(list[i]);
+    });
+    
+    
+  
+    }
+
+
+
+
+})
+
+
+//console.log(li);
+
+
+////////////////////////////////////  
+
+
+
+
+
+// myUnorderedList.addEventListener('click', function(){
+
+//   li.style.color =random_item(colorArray);
+// })
+
